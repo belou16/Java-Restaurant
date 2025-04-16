@@ -1,9 +1,14 @@
 import java.util.Scanner;
+import backend.*;
+import DB.*;
+import emploies.*;
+import emploies.roles.*;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Menu menu = new Menu();
+        Stock stock = new Stock();
 
         // Ajout de plats au menu
         menu.ajouterPlat(new Plat("Margherita", 8.50, "pizza"));
@@ -25,9 +30,15 @@ public class Main {
 
             for (Plat plat : menu.getPlats()) {
                 if (plat.getNom().equalsIgnoreCase(choix)) {
-                    commande.ajouterPlat(plat);
-                    platTrouve = true;
-                    System.out.println(plat.getNom() + " ajouté à la commande.");
+                    // Vérification du stock avant d'ajouter le plat à la commande
+                    if (stock.verifierIngredient(plat.getNom(), 1)) {
+                        commande.ajouterPlat(plat);
+                        stock.mettreAJourStock(plat.getNom(), 1);
+                        platTrouve = true;
+                        System.out.println(plat.getNom() + " ajouté à la commande.");
+                    } else {
+                        System.out.println("Impossible d'ajouter " + plat.getNom() + " : rupture de stock.");
+                    }
                     break;
                 }
             }

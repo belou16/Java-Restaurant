@@ -1,3 +1,5 @@
+package backend;
+
 public class Plat {
     private String nom;
     private double prix;
