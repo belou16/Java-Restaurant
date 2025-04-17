@@ -24,4 +24,13 @@ public class Menu {
             System.out.println(plat);
         }
     }
+
+    public Plat trouverPlatParNom(String nom) {
+        for (Plat plat : plats) {
+            if (plat.getNom().equalsIgnoreCase(nom)) {
+                return plat;
+            }
+        }
+        return null; // Si le plat n'est pas trouvé
+    }
 }

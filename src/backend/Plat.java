@@ -23,6 +23,8 @@ public class Plat {
         return type;
     }
 
+
+
     @Override
     public String toString() {
         return nom + " (" + type + ") - " + prix + "€";
